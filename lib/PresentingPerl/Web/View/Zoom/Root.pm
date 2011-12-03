@@ -10,10 +10,6 @@ sub wrap {
   
   $zoom->select('#main-content')->collect_content({into => \@body})->run;
   
-  use Data::Dump::Streamer;
-  Dump \@body;
-  
-  
   my $layout_zoom = HTML::Zoom->from_file($stash->{wrapper_template});
   # This does *not* modify $layout_zoom, but rather returns the modified version!
   return $layout_zoom->select('#main-content')->replace_content(\@body);
