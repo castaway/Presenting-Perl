@@ -37,12 +37,36 @@ sub front_page {
             }
     } $announcements->all ];
     
-    $zoom->select('#announcement-list')->repeat_content($ann_list);
+    $zoom = $zoom->select('#announcement-list')->repeat_content($ann_list);
   }
   
   $self->wrap($zoom, $stash);
 }
 
 
+sub bucket {
+    my ($self, $stash) = @_;
+
+    my $bucket = $stash->{bucket};
+    my $zoom = $_;
+    
+    my $videos = [ map {
+        my $video = $_;
+        sub {
+            $_->select('.video-name')->replace_content($video->name)
+              ->select('.video-author')->replace_content($video->author)
+              ->select('.video-link')->set_attribute(
+                  href => $video->slug.'/'
+                )
+        }
+                   } $bucket->videos->all ];
+
+
+    $zoom = $zoom->select('.bucket-name')->replace_content($bucket->name)
+        ->select('#video-list')->repeat_content($videos);
+
+    $self->wrap($zoom, $stash);
+
+}
 
 1;
