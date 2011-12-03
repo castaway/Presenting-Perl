@@ -22,6 +22,9 @@ requires 'Catalyst::View::HTML::Zoom';
 requires 'Catalyst::Model::DBIC::Schema';
 requires 'Catalyst::Plugin::StackTrace';
 
+requires 'CatalystX::SimpleLogin';
+requires 'DBIx::Class::TimeStamp';
+
 
 test_requires 'Test::More' => '0.88';
 catalyst;
