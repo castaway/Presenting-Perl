@@ -21,6 +21,10 @@ use Catalyst qw/
     StackTrace
     ConfigLoader
     +CatalystX::SimpleLogin
+    Authentication
+    Session
+    Session::Store::File
+    Session::State::Cookie
     Static::Simple
 /;
 
