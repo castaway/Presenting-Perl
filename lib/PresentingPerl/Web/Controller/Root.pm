@@ -39,6 +39,7 @@ The root page (/)
 sub front_page : Path :Args(0) {
     my ($self, $c) = @_;
 
+    $c->stash->{current_view} = 'Zoom';
     $c->stash->{announcements} = $c->model("DB::Announcement")->top_n(5);
 }
 
@@ -49,6 +50,7 @@ sub bucket: Path: Args(1) {
 
     return $c->forward('default') if(!$bucketrow);
 
+    $c->stash->{current_view} = 'Zoom';
     $c->stash->{bucket} = $bucketrow;
 }
 

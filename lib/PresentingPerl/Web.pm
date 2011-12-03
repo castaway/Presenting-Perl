@@ -18,7 +18,6 @@ use Catalyst::Runtime 5.80;
 
 use Catalyst qw/
     -Debug
-    StackTrace
     ConfigLoader
     +CatalystX::SimpleLogin
     Static::Simple
@@ -39,7 +38,6 @@ our $VERSION = '0.01';
 
 __PACKAGE__->config(
     name => 'PresentingPerl::Web',
-    default_view => 'Zoom',
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
     enable_catalyst_header => 1, # Send X-Catalyst header
