@@ -20,7 +20,7 @@ use Catalyst qw/
     -Debug
     StackTrace
     ConfigLoader
-    CatalystX::SimpleLogin
+    +CatalystX::SimpleLogin
     Static::Simple
 /;
 
