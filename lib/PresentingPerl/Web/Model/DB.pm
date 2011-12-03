@@ -5,12 +5,6 @@ use base 'Catalyst::Model::DBIC::Schema';
 
 __PACKAGE__->config(
     schema_class => 'PresentingPerl::Schema',
-    
-    connect_info => {
-        dsn => 'dbi:SQLite:idiotbox.db',
-        user => '',
-        password => '',
-    }
 );
 
 =head1 NAME
