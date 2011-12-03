@@ -23,6 +23,8 @@ requires 'Catalyst::Model::DBIC::Schema';
 requires 'Catalyst::Plugin::StackTrace';
 
 # Authentication
+requires 'Authen::Passphrase::SaltedDigest';
+requires 'DBIx::Class::InflateColumn::Authen::Passphrase';
 requires 'CatalystX::SimpleLogin';
 requires 'Catalyst::Authentication::Store::DBIx::Class';
 requires 'Catalyst::Plugin::Authorization::Roles';
