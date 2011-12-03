@@ -22,7 +22,11 @@ requires 'Catalyst::View::HTML::Zoom';
 requires 'Catalyst::Model::DBIC::Schema';
 requires 'Catalyst::Plugin::StackTrace';
 
+# Authentication
 requires 'CatalystX::SimpleLogin';
+requires 'Catalyst::Authentication::Store::DBIx::Class';
+requires 'Catalyst::Plugin::Authorization::Roles';
+
 requires 'DBIx::Class::TimeStamp';
 
 
