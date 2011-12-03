@@ -26,12 +26,18 @@ The root page (/)
 
 =cut
 
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
+sub front_page : Path :Args(0) {
+    my ($self, $c) = @_;
 
-    # Hello World
-    $c->response->body( $c->welcome_message );
+    $c->stash->{announcements} = $c->model("DB::Announcement");
 }
+
+# sub index :Path :Args(0) {
+#     my ( $self, $c ) = @_;
+
+#     # Hello World
+#     $c->response->body( $c->welcome_message );
+# }
 
 =head2 default
 

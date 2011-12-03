@@ -86,7 +86,7 @@ Related object: L<PresentingPerl::Schema::Result::Bucket>
 =cut
 
 __PACKAGE__->belongs_to(
-  "bucket_slug",
+  "bucket",
   "PresentingPerl::Schema::Result::Bucket",
   { slug => "bucket_slug" },
   {
