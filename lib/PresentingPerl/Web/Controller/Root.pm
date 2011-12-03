@@ -20,6 +20,16 @@ PresentingPerl::Web::Controller::Root - Root Controller for PresentingPerl::Web
 
 =head1 METHODS
 
+=head2 all
+
+=cut
+
+sub auto :Private {
+  my ($self, $c) = @_;
+
+  $c->stash->{wrapper_template} = $c->path_to('root/pp-tempates/html/layout.html');
+}
+
 =head2 index
 
 The root page (/)
