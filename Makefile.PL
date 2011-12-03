@@ -20,6 +20,7 @@ requires 'Config::General'; # This should reflect the config file format you've 
 
 requires 'Catalyst::View::HTML::Zoom';
 requires 'Catalyst::Model::DBIC::Schema';
+requires 'Catalyst::Plugin::StackTrace';
 
 
 test_requires 'Test::More' => '0.88';
