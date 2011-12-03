@@ -29,7 +29,7 @@ The root page (/)
 sub front_page : Path :Args(0) {
     my ($self, $c) = @_;
 
-    $c->stash->{announcements} = $c->model("DB::Announcement");
+    $c->stash->{announcements} = $c->model("DB::Announcement")->top_n(5);
 }
 
 # sub index :Path :Args(0) {
