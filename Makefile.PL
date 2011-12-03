@@ -24,6 +24,7 @@ requires 'Catalyst::Plugin::StackTrace';
 
 requires 'CatalystX::SimpleLogin';
 requires 'DBIx::Class::TimeStamp';
+requires 'Template::Tiny';
 
 
 test_requires 'Test::More' => '0.88';

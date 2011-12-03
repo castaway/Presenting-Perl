@@ -125,7 +125,7 @@ Related object: L<PresentingPerl::Schema::Result::Bucket>
 =cut
 
 __PACKAGE__->belongs_to(
-  "bucket_slug",
+  "bucket",
   "PresentingPerl::Schema::Result::Bucket",
   { slug => "bucket_slug" },
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
@@ -135,6 +135,14 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.07014 @ 2011-12-03 12:17:58
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W4NNNp9swn107y7yM69idw
 
+sub file_name {
+    my ($self) = @_;
+    (my $s = join(' ', $self->author, $self->name)) =~ s/ /-/g;
+  $s;
+}
+sub url_path {
+  join('/', $_[0]->bucket->slug, $_[0]->slug);
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;
