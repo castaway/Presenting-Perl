@@ -20,7 +20,9 @@ PresentingPerl::Web::Controller::Root - Root Controller for PresentingPerl::Web
 
 =head1 METHODS
 
-=head2 all
+=head2 auto
+
+This gets run for everything.
 
 =cut
 
@@ -30,20 +32,20 @@ sub auto :Private {
   $c->stash->{wrapper_template} = $c->path_to('root/pp-tempates/html/layout.html');
 }
 
-=head2 index
+=head2 front_page
 
 The root page (/)
 
 =cut
 
-sub front_page : Path :Args(0) {
+sub front_page :Path :Args(0) {
     my ($self, $c) = @_;
 
     $c->stash->{current_view} = 'Zoom';
     $c->stash->{announcements} = $c->model("DB::Announcement")->top_n(5);
 }
 
-sub bucket: Path: Args(1) {
+sub bucket :Path :Args(1) {
     my ($self, $c, $bucket) = @_;
 
     my $bucketrow = $c->model('DB::Bucket')->find({ slug => $bucket });
