@@ -12,6 +12,7 @@ use namespace::autoclean;
 extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
+__PACKAGE__->load_components(qw(InflateColumn::Authen::Passphrase));
 
 =head1 NAME
 
@@ -67,7 +68,7 @@ __PACKAGE__->add_columns(
   "username",
   { data_type => "text", is_nullable => 1 },
   "password",
-  { data_type => "text", is_nullable => 1 },
+  { data_type => "varchar", size => 255, is_nullable => 1, inflate_passphrase => 'rfc2307' },
   "email_address",
   { data_type => "text", is_nullable => 1 },
   "first_name",
