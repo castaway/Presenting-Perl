@@ -32,6 +32,16 @@ sub front_page : Path :Args(0) {
     $c->stash->{announcements} = $c->model("DB::Announcement")->top_n(5);
 }
 
+sub bucket: Path: Args(1) {
+    my ($self, $c, $bucket) = @_;
+
+    my $bucketrow = $c->model('DB::Bucket')->find({ slug => $bucket });
+
+    return $c->forward('default') if(!$bucketrow);
+
+    $c->stash->{bucket} = $bucketrow;
+}
+
 # sub index :Path :Args(0) {
 #     my ( $self, $c ) = @_;
 
