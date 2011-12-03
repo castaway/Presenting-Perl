@@ -2,6 +2,7 @@ package PresentingPerl::Web::View::Zoom::Root;
 use Moose;
 
 use Data::Dumper;
+use HTML::Zoom::FilterBuilder::Template;
 
 sub wrap {
   my ($self, $zoom, $stash) = @_;
@@ -67,6 +68,27 @@ sub bucket {
 
     $self->wrap($zoom, $stash);
 
+}
+
+sub video {
+    my ($self, $stash) = @_;
+
+    my $video_url = $stash->{video_file};
+    my $video = $stash->{video};
+
+    my $zoom = $_;
+
+    $zoom = $zoom->select('.video-name')->replace_content($video->name)
+      ->select('.author-name')->replace_content($video->author)
+      ->select('.bucket-link')->set_attribute(
+          href => '../'
+        )
+      ->select('.bucket-name')->replace_content($video->bucket->name)
+      ->select('.video-details')->replace_content($video->details)
+      ->select('script')->template_text_raw({ video_url => $video_url });
+
+    $self->wrap($zoom, $stash);
+  
 }
 
 1;

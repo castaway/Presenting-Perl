@@ -30,6 +30,7 @@ requires 'Catalyst::Authentication::Store::DBIx::Class';
 requires 'Catalyst::Plugin::Authorization::Roles';
 
 requires 'DBIx::Class::TimeStamp';
+requires 'Template::Tiny';
 
 
 test_requires 'Test::More' => '0.88';

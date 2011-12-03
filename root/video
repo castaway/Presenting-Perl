@@ -1,0 +1,56 @@
+<div id="main-content">
+
+		<h2 class="author-name">Author here</h2>
+		<h1 class="video-name">Title here</h1>        
+		<a href="../"><h3 class="bucket-name">Event name here</h3></a>
+
+		<div id="mvcontainer"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</div>
+		<script type="text/javascript" src="http://media.dreamhost.com/mp4/swfobject.js"></script>
+
+		<script type="text/javascript">
+			var s1 = new SWFObject("http://media.dreamhost.com/mp4/player.swf","mp1","640","480","9","#FFFFFF");
+			s1.addParam("allowfullscreen","true");
+			s1.addParam("allowscriptaccess","always");
+			s1.addParam("flashvars","&file=[% video_url %]");
+			s1.write("mvcontainer");
+		</script>
+
+   
+		<p class="video-license">
+			This work is licensed under a 
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+			Creative Commons Attribution - Noncommercial - No Derivative Works 3.0 
+			Unported License</a>.
+		</p>
+
+
+          </div>
+
+	<div id="custom-html">
+<!-- INSERT CUSTOM HTML HERE -->
+		<div class="video-details">
+<!--
+              The presenter might have provided a link to their slides here. Or they might not. 
+              If their name's Matt then they probably didn't remember to upload them yet. Oh well ...
+-->              
+		</div>    
+		<h2>Upload Custom HTML</h2>
+		<p>
+		Presenting Perl intends to allow authors to provide additional HTML containing a description of their talk or links to slides.
+		There will soon be a form to help automate the process of uploading custom
+		HTML on this page. Until we get that live, if you're the author
+		of this talk (or just happen to have collected links to slides
+		and similar for us) please send the HTML you wish
+		to appear to 
+		<a href="mailto:m.keating@shadowcat.co.uk">m.keating(at)shadowcat.co.uk</a>
+		for inclusion.
+		</p>
+<!--
+	BUILD FORM HERE!
+-->
+           
+<!-- END CUSTOM HTML HERE -->    
+		</div>
+
+<!-- END MAIN CONTENT -->        
+</div>

@@ -3,6 +3,8 @@ use Moose;
 use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller' }
+use List::Util qw(first);
+
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -54,6 +56,25 @@ sub bucket :Path :Args(1) {
 
     $c->stash->{current_view} = 'Zoom';
     $c->stash->{bucket} = $bucketrow;
+}
+
+sub video :Path :Args(2) {
+    my ($self, $c, $bucket, $video) = @_;
+
+    my $videorow = $c->model('DB::Video')->find({ slug => $video });
+    my $video_file = first { 
+      -e join('/', $c->path_to('root/static'), $_)
+    } map {
+        join('/', $videorow->bucket->slug, $videorow->slug, $videorow->file_name.".$_")
+    } @{ $c->config->{SupportedFormats} };
+    return $c->forward('default') if(!$videorow || !$video_file);
+
+    $video_file = $c->req->base . 'static/' . $video_file;
+ 
+    $c->stash->{current_view} = 'Zoom';
+    $c->stash->{video} = $videorow;
+    $c->stash->{video_file} = $video_file;
+
 }
 
 # sub index :Path :Args(0) {
