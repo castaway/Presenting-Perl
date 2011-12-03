@@ -1,0 +1,117 @@
+body {
+	background-image:url('/style/images/background-blue.png');
+	background-repeat:no-repeat;
+	background-color:#00b2e7;
+	color:#fff;
+}
+
+h1, h2, h3 {
+	font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	font-weight:200;
+	letter-spacing:0.7pt;
+	font-size:28pt;
+}
+
+h2 {
+	font-size:18pt;
+}
+
+p, li {
+	font:10pt Arial, sans-serif;
+	color:#e6f6fc;
+}
+
+li {
+	list-style-type:square;
+}
+
+a {
+	color:#b2ebff;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#fff;
+}
+
+
+#container {
+	margin:3em auto;
+	width:900px;
+}
+
+#navigation {
+	width:170px;
+	float:left;
+}
+
+#navigation img {
+	width:150px;
+	height:150px;
+	margin-right:1em;
+	border:none;
+}
+
+#main-content {
+	width:730px;
+	float:right;
+}
+
+#footer {
+	width:900px;
+	margin:0 auto;
+	border-top:1px solid #ccc;
+	clear:both;
+
+}
+
+p.footer {
+	font-size:8pt;
+	color:#eee;
+	margin-top:3pt;
+	text-align:right;
+}
+
+p.footer a {
+	text-decoration:none;
+	color:#fff;
+}
+
+p.footer a:hover {
+	text-decoration:underline;
+}
+
+.powered-by {
+	float:left;margin-top:8pt;padding-right:1em;
+}
+
+.powered-by h2 {
+	display:inline;
+	font-size:10pt;
+	background-image:url('http://external.shadowcatprojects.net/data/common/images/idiot-box.png');
+	background-repeat:no-repeat;
+	padding:6px 0 8px 30px;
+}
+
+h1.video-name, h2.author-name {
+	font-size:20pt;
+	padding:0;
+	margin:0;
+	display:inline;
+}
+
+h2.author-name:after {
+	content: " - ";
+}
+
+h3.video_license {
+	font-size:8pt;
+}
+
+.bucket-name {
+	margin:0 0 0.2em 0;font-size:20pt;
+}
+
+a.bucket-link .bucket-name {
+  font-size:12pt;
+}
