@@ -11,6 +11,7 @@ all_from 'lib/PresentingPerl/Web.pm';
 
 requires 'Catalyst::Runtime' => '5.90007';
 requires 'Catalyst::Plugin::ConfigLoader';
+requires 'Catalyst::Plugin::Redirect';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Action::RenderView';
 requires 'Moose';
@@ -28,6 +29,7 @@ requires 'DBIx::Class::InflateColumn::Authen::Passphrase';
 requires 'CatalystX::SimpleLogin';
 requires 'Catalyst::Authentication::Store::DBIx::Class';
 requires 'Catalyst::Plugin::Authorization::Roles';
+requires 'Perl6::Junction';
 
 requires 'DBIx::Class::TimeStamp';
 requires 'Template::Tiny';
