@@ -104,6 +104,19 @@ Attempt to render a view, if needed.
 
 sub end : ActionClass('RenderView') {}
 
+=head2 denied
+
+Access denied
+
+=cut
+
+sub denied :Private {
+    my ($self, $c) = @_;
+
+    $c->res->status('403');
+    $c->res->body('Denied!');
+}
+
 =head1 AUTHOR
 
 Catalyst developer
