@@ -101,10 +101,32 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-12-03 14:51:10
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LdcXqKuNwSPcZp4qrNP8mw
 
+# many_to_many():
+#   args:
+#     1) Name of relationship, DBIC will create accessor with this name
+#     2) Name of has_many() relationship this many_to_many() is shortcut for
+#     3) Name of belongs_to() relationship in model class of has_many() above
+#   You must already have the has_many() defined to use a many_to_many().
+__PACKAGE__->many_to_many(roles => 'user_roles', 'role');
+
 sub check_password {
     my ($self, $passp) = @_;
 
     return $self->password->match($passp);
+}
+
+=head2 has_role
+
+Check if a user has the specified role
+
+=cut
+
+use Perl6::Junction qw/any/;
+sub has_role {
+    my ($self, $role) = @_;
+
+    # Does this user posses the required role?
+    return any(map { $_->role } $self->roles) eq $role;
 }
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
