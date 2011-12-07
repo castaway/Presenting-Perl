@@ -21,6 +21,8 @@ use Catalyst qw/
     ConfigLoader
     +CatalystX::SimpleLogin
     Authentication
+    Authorization::Roles
+    Redirect
     Session
     Session::Store::File
     Session::State::Cookie
