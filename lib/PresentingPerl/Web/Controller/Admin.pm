@@ -5,20 +5,11 @@ use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller::ActionRole' }
 
-sub root :Path :Args(0) {
+sub root :Path :Args(0) : Local Does('NeedsLogin') {
     my ($self, $c) = @_;
 
-    my $user;
-
-    if($user = $c->user) {
-        unless($user->get_object->has_role('admin')) {
-            $c->redirect('/login');
-        }
-    }
-
-    else {
+    unless($c->user->get_object->has_role('admin')) {
         $c->redirect('/login');
-
     }
 
     my $buckets = $c->model('DB::Bucket');
