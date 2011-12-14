@@ -1,0 +1,32 @@
+[%- meta.wrapper = 'shinycms.tt';
+    meta.title   = 'Users';
+-%]
+<table class="list">
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+    [%- FOREACH user IN users %]
+    <tr onmouseover="style.backgroundColor='#eeffdd';" onmouseout="style.backgroundColor='transparent'">
+        <td>
+            [% user.username | html %]
+        </td>
+        <td>
+            [% user.first_name | html %] [% user.last_name | html %]
+        </td>
+        <td>
+            <a href="[% c.uri_for( 'view',      user.id ) %]">View</a> /
+            <a href="[% c.uri_for( 'edit',      user.id ) %]">Edit</a> /
+            <a href="[% c.uri_for( 'password',  user.id ) %]">Change password</a>
+        </td>
+    </tr>
+    [%- END %]
+</table>
+
