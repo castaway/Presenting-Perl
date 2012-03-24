@@ -1,0 +1,44 @@
+        <div id="main-content">
+
+            <h2 class="author-name">
+              List of available buckets
+            </h2>
+            <p>
+              Add a new bucket
+            </p>
+            <form class="add-bucket-form" action="" method="POST">
+              <label for="new_name">Enter a name for this bucket</label> <input type="text" name="new_name" id="new_name"/>
+              <br /><br />
+              <label for="new_slug">Enter a relative URI for this bucket</label> <input type="text" name="new_slug" id="new_slug"/>
+              <br /><br />
+              <input type="submit" value="Create Bucket"/>
+            </form>
+            <span class="error-text">Some error</span>
+            <p>
+              Below is a list of existing buckets. Click on the buckets to change details about them, and 'Delete' to remove them.
+            </p>
+            <ul id="bucket-list">
+              <li class="bucket">
+                <a class="edit-link">
+                <span class="bucket-slug">Some Random Event</span> -
+                <span class="bucket-name">Some Random Event</span>
+                </a>
+                <a class="delete-link">Delete</a>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div id="custom-html">        
+            <h1>
+              <span class="bucket-name">THIS IZ MAI BUKKIT</span>
+            </h1>
+            <ul id="video-list">
+              <li class="video">
+                <a class="video-link"><span class="video-name">Really Imaginative Video Name</span> (<span class="video-author">Some Guy</span>)</a>
+              </li>
+            </ul>
+          </div>
+          
+<!-- END MAIN CONTENT -->        
+        </div>

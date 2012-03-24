@@ -16,7 +16,7 @@ sub wrap {
   return $layout_zoom->select('#main-content')->replace_content(\@body);
 }
 
-sub root {
+sub all_buckets {
     my ($self, $stash) = @_;
 
     my $error = $stash->{error} || '';
@@ -34,7 +34,7 @@ sub root {
                 )
         }
        
-        } ($stash->{buckets}->all) ];
+        } ($stash->{buckets_rs}->all) ];
 
       $zoom = $zoom->select('#bucket-list')
         ->repeat_content($buckets)
