@@ -9,12 +9,8 @@ use warnings;
 
 use base 'DBIx::Class::Schema';
 
+our $VERSION = '2.0';
+
 __PACKAGE__->load_namespaces;
 
-
-# Created by DBIx::Class::Schema::Loader v0.07014 @ 2011-12-03 12:17:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jLcpg4w0yDRKrtewDvvzyg
-
-
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;

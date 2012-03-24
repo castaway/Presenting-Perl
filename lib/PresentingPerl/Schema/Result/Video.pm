@@ -81,6 +81,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 0 },
   "details",
   { data_type => "text", default_value => "", is_nullable => 0 },
+  "external_embed_link",
+  { data_type => "text", default_value => "", is_nullable => 1 },
   "announcement_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
@@ -131,10 +133,6 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
-
-# Created by DBIx::Class::Schema::Loader v0.07014 @ 2011-12-03 12:17:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W4NNNp9swn107y7yM69idw
-
 sub file_name {
     my ($self) = @_;
     (my $s = join(' ', $self->author, $self->name)) =~ s/ /-/g;
@@ -144,5 +142,4 @@ sub url_path {
   join('/', $_[0]->bucket->slug, $_[0]->slug);
 }
 
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;
