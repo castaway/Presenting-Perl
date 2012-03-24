@@ -73,5 +73,6 @@ my $user = $schema->resultset('User')->create({
         passphrase    => $cli_pass,
     ),
     username      => $cli_user,
+    user_roles    => [ { role => { role => 'admin' } } ],
 });
 

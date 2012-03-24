@@ -19,7 +19,7 @@ PresentingPerl::Schema::Result::Role
 
 =cut
 
-__PACKAGE__->table("role");
+__PACKAGE__->table("roles");
 
 =head1 ACCESSORS
 

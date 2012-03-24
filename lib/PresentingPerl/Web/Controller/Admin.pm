@@ -3,11 +3,15 @@ package PresentingPerl::Web::Controller::Admin;
 use Moose;
 use namespace::autoclean;
 
-BEGIN { extends 'Catalyst::Controller' }
+BEGIN { extends 'Catalyst::Controller::ActionRole' }
 
 ## This thing runs on HTML::Zoom, look in View::Zoom::Admin to see how the stash is applied to the templates.
 sub begin : Private {
     my ($self, $c) = @_;
+
+    unless($c->user_exists && $c->user->get_object->has_role('admin')) {
+        return $c->res->redirect($c->uri_for('/login'));
+    }
 
     $c->stash->{current_view} = 'Zoom';
 }
