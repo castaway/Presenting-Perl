@@ -60,18 +60,79 @@ sub all_buckets :Chained('buckets') :PathPart('') :Args(0) {
 
 ## admin/buckets/<slug>
 sub bucket :Chained('buckets') :PathPart('') :CaptureArgs(1) {
-    my ($self, $c, $bucket) = @_;
+    my ($self, $c, $bucket_slug) = @_;
 
     ## Find bucket by slug and add bucket object to stash
+    my $bucket = $c->stash->{buckets_rs}->find({ slug => $bucket_slug });
+    if(!$bucket) {
+        $c->stash('error', "Bucket $bucket_slug doesn't exist!");
+        $c->go($self->action_for('all_buckets'));
+    }
+
+    $c->stash('bucket' => $bucket);
 }
 
 ## View/Edit single bucket/Add video
 sub edit_bucket :Chained('bucket') :PathPart('') :Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash->{videos_rs} = $c->stash->{bucket}->videos_rs;
+
+    if($c->req->param) {
+        my $name = $c->req->param('new_name');
+        my $title = $c->req->param('title');
+        my $author = $c->req->param('author');
+        $c->stash($c->req->params);
+
+        if(!$name && !$title && !$author) {
+            $c->stash('error', 'Please fill in the bucket name or the add video form');
+            return;
+        }
+
+        if($c->req->param('name')) {
+            $c->stash->{bucket}->update({ name => $name });
+        } else {
+
+            ## This will currently fail as we have no announcement id!
+            (my $slug = lc $name) =~ s/ /-/g;
+            $c->stash->{videos_rs}->create({
+                author => $author,
+                name => $title,
+                slug => $slug,
+                                           });
+        }
+    }
+
 }
 
 ## admin/buckets/<slug>/<video-slug>
 sub edit_video :Chained('bucket') :PathPart('') :Args(1) {
     my ($self, $c, $video_slug) = @_;
+
+    my $video = $c->stash->{bucket}->videos_rs->find({ slug => $video_slug });
+    if(!$video) {
+        $c->stash('error', "Video $video_slug doesn't exist!");
+        $c->go($self->action_for('bucket'), $c->stash->{bucket}->slug);
+    }
+
+    if($c->req->param) {
+        my ($title, $author) = ($c->req->param('title'),
+                             $c->req->param('author') );
+        $c->stash($c->req->params);
+
+        if(!$title || !$author) {
+            $c->stash('error', 'Please fill in both an author and a title for the video');
+            return;
+        }
+
+        $c->stash->{video}->update({
+            name => $title,
+            author => $author,
+                                   });
+    }
+
+    $c->stash('video' => $video);
+    
 }
 
 __PACKAGE__->meta->make_immutable;

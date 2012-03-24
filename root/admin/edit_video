@@ -1,0 +1,26 @@
+        <div id="main-content">
+
+          <div id="custom-html">        
+            <h1>
+              Editing video: <span class="video-name">THIS IZ MAI VIDEO</span>
+            </h1>
+<!--
+            <form enctype="multipart/form-data" class="edit-bucket-form" action="" method="POST">
+-->
+
+            <form class="edit-video-form" action="" method="POST">
+              <label for="title">Title: </label> <input type="text" name="title"/>
+              <br /><br />
+              <label for="author">Author: </label> <input type="text" name="author"/>
+              <br /><br />
+<!--
+              <label for="new_file">Upload new file to bucket</label> <input type="file" name="new_file" accept="*.flv,*.m4v"/>
+              <br /><br />
+-->
+              <input type="submit" value="Modify"/>
+            </form>
+            <span class="error-text">Some error</span>
+          </div>
+
+<!-- END MAIN CONTENT -->        
+        </div>
