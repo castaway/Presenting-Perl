@@ -23,7 +23,7 @@ if(-e $dir . $file) {
 }
 
 ok($schema = PresentingPerl::Schema->connect("dbi:SQLite:$dir$file"), "Creating a schema object");
-$schema->deploy();
+$schema->deploy({ add_drop_table => 0 }, $dir);
 
 # Check the file exists
 my $file_exists = (-e $dir . $file);
