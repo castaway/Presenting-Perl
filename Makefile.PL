@@ -11,7 +11,6 @@ all_from 'lib/PresentingPerl/Web.pm';
 
 requires 'Catalyst::Runtime' => '5.90007';
 requires 'Catalyst::Plugin::ConfigLoader';
-requires 'Catalyst::Plugin::Redirect';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Action::RenderView';
 requires 'Moose';
