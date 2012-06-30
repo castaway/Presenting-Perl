@@ -65,8 +65,10 @@ sub video :Path :Args(2) {
     my $video_file = first { 
       -e join('/', $c->path_to('root/static'), $_)
     } map {
-        join('/', $videorow->bucket->slug, $videorow->slug, $videorow->file_name.".$_")
+        join('/', 'videos', $videorow->bucket->slug, $videorow->slug, $videorow->file_name.".$_")
     } @{ $c->config->{SupportedFormats} };
+
+    $c->log->debug("File: $video_file, row: $videorow");
     return $c->forward('default') if(!$videorow || !$video_file);
 
     $video_file = $c->req->base . 'static/' . $video_file;
