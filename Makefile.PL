@@ -20,7 +20,9 @@ requires 'Config::General'; # This should reflect the config file format you've 
 
 requires 'Catalyst::View::HTML::Zoom';
 requires 'Catalyst::Model::DBIC::Schema';
-requires 'Catalyst::Plugin::StackTrace';
+requires 'MooseX::NonMoose';
+# 0.11 is very faily on dev.pp.org
+#requires 'Catalyst::Plugin::StackTrace';
 
 # Authentication
 requires 'Authen::Passphrase::SaltedDigest';
