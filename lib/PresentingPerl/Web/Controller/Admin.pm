@@ -5,6 +5,10 @@ use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller::ActionRole' }
 
+## If the admin user edits or adds a video, we create a pending announcement and stuff it in their session
+## thereafter the UI should display the pending announcement and a link to releasing it
+## currently announcements are tied to buckets.. sane or not sane?
+
 ## This thing runs on HTML::Zoom, look in View::Zoom::Admin to see how the stash is applied to the templates.
 sub begin : Private {
     my ($self, $c) = @_;
@@ -82,6 +86,7 @@ sub edit_bucket :Chained('bucket') :PathPart('') :Args(0) {
         my $name = $c->req->param('new_name');
         my $title = $c->req->param('title');
         my $author = $c->req->param('author');
+        my $embed_link = $c->req->param('external_embed_link');
         $c->stash($c->req->params);
 
         if(!$name && !$title && !$author) {
@@ -93,12 +98,32 @@ sub edit_bucket :Chained('bucket') :PathPart('') :Args(0) {
             $c->stash->{bucket}->update({ name => $name });
         } else {
 
+	    if($embed_link && $embed_link =~ m{^https?://(?:www\.)?youtube\.com/.*v=(\w+)}) {
+		$embed_link = "http://www.youtube.com/embed/$1";
+	    } else {
+		$c->log->debug($c->user->get_object->username . " tried to embed a link to $embed_link but it's not a youtube video");
+		$embed_link = '';
+	    }
+
+	    ## fetch/create pending announcement
+	    my $announce_id = $c->session->{announcement_id};
+	    if(!$announce_id) {
+		my $announce = $c->model('DB::Announcement')->create({
+		    made_at => DateTime->now,
+		    bucket_slug => $c->stash->{bucket}->slug,
+								     });
+		$c->session->{announcement_id} = $announce->id;
+		$announce_id = $announce->id;
+	    }
+
             ## This will currently fail as we have no announcement id!
-            (my $slug = lc $name) =~ s/ /-/g;
+            (my $slug = lc $title) =~ s/ /-/g;
             $c->stash->{videos_rs}->create({
                 author => $author,
                 name => $title,
                 slug => $slug,
+		external_embed_link => $embed_link,
+		announcement_id => $announce_id,
                                            });
         }
     }
@@ -116,18 +141,24 @@ sub edit_video :Chained('bucket') :PathPart('') :Args(1) {
     }
 
     if($c->req->param) {
-        my ($title, $author) = ($c->req->param('title'),
-                             $c->req->param('author') );
+        my ($title, $author, $embed_link) = ($c->req->param('title'),
+					     $c->req->param('author'),
+	                                     $c->req->param('external_embed_link'));
         $c->stash($c->req->params);
 
         if(!$title || !$author) {
             $c->stash('error', 'Please fill in both an author and a title for the video');
             return;
         }
-
+	
+	if($embed_link && $embed_link !~ m{^https?://(www\.)?youtube}) {
+	    $c->log->debug($c->user->get_object->username . " tried to embed a link to $embed_link but it's not a youtube video");
+	    $embed_link = '';
+	}
         $c->stash->{video}->update({
             name => $title,
             author => $author,
+	    external_embed_link => $embed_link
                                    });
     }
 

@@ -69,13 +69,22 @@ sub video :Path :Args(2) {
     } @{ $c->config->{SupportedFormats} };
 
     $c->log->debug("File: $video_file, row: $videorow");
-    return $c->forward('default') if(!$videorow || !$video_file);
+    return $c->forward('default') if(!$videorow || (!$video_file && !$videorow->external_embed_link));
 
-    $video_file = $c->req->base . 'static/' . $video_file;
+    if($video_file) {
+	$video_file = $c->req->base . 'static/' . $video_file;
+    }
  
     $c->stash->{current_view} = 'Zoom';
     $c->stash->{video} = $videorow;
-    $c->stash->{video_file} = $video_file;
+    if($videorow->external_embed_link) {
+	$c->log->debug("Got a youtube video");
+	$c->stash->{video_file} = $videorow->external_embed_link;
+	$c->stash->{video_type} = 'youtube';
+    } else {
+	$c->stash->{video_type} = 'local';
+	$c->stash->{video_file} = $video_file;
+    }
 
 }
 

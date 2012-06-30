@@ -13,6 +13,8 @@
               <br /><br />
               <label for="author">Author: </label> <input type="text" name="author"/>
               <br /><br />
+              <label for="author">Video to embed(optional): </label> <input type="text" name="external_embed_link"/>
+              <br /><br />
 <!--
               <label for="new_file">Upload new file to bucket</label> <input type="file" name="new_file" accept="*.flv,*.m4v"/>
               <br /><br />
