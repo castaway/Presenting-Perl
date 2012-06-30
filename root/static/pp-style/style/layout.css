@@ -17,23 +17,29 @@ h2 {
 }
 
 p, li {
-	font:10pt Arial, sans-serif;
+	font: 100% Arial, sans-serif;
 	color:#e6f6fc;
 }
 
+p {
+    font-size: 10pt;
+}
+
 li {
-	list-style-type:square;
+    list-style-type:square;
+    padding: 4px 0 0 0;
 }
 
 a {
-	color:#b2ebff;
-	text-decoration:none;
+    color:#eff;
+    text-decoration:underline;
+    font-weight: bold;
 }
 
 a:hover {
-	color:#fff;
+    color:#630;
+    text-decoration:none;
 }
-
 
 #container {
 	margin:3em auto;
@@ -114,4 +120,31 @@ h3.video_license {
 
 a.bucket-link .bucket-name {
   font-size:12pt;
+}
+
+#navbar {
+  width: 730px;
+  height: 30px;
+}
+
+#navbar ul {
+  height: 30px;
+}
+
+#navbar li {
+  float: right;
+  font-size: 120%;
+  padding: 3px 5px 3px 5px;
+  border-right: 1pt solid white;
+  list-style-type: none;
+}
+
+#navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#navbar a:hover {
+  color: black;
 }

@@ -22,12 +22,17 @@ sub front_page {
   my $zoom = $_;
   
   if (!$ENV{TEST_NO_DB}) {
+    my $dt_formatter = sub {
+        my ($dt) = @_;
+        return '' unless blessed($dt) and $dt->isa('DateTime');
+        return $dt->ymd('-');
+    };
     my $announcements = $stash->{announcements};
     my $ann_list = [ map { 
       my $obj = $_; 
       sub {
         $_->select('.bucket-name')->replace_content($obj->bucket->name)
-          ->select('.made-at')->replace_content($obj->made_at->iso8601())
+          ->select('.made-at')->replace_content( $dt_formatter->($obj->made_at) )
             ->select('.bucket-link')->set_attribute(
                                                     'href' => $obj->bucket->slug.'/'
                                                    )
