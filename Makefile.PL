@@ -18,6 +18,7 @@ requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 
+requires 'Catalyst::View::XML::Feed';
 requires 'Catalyst::View::HTML::Zoom';
 requires 'Catalyst::Model::DBIC::Schema';
 requires 'MooseX::NonMoose';
