@@ -23,6 +23,8 @@
               <br /><br />
               <label for="author">Video author: </label> <input type="text" name="author" id="author"/>
               <br /><br />
+              <label for="author">Video to embed(optional): </label> <input type="text" name="external_embed_link"/>
+              <br /><br />
               <input type="submit" value="Add Video"/>
             </form>
 

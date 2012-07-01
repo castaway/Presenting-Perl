@@ -29,7 +29,7 @@ sub all_buckets {
             $_->select('.bucket-slug')->replace_content($obj->slug)
                 ->select('.bucket-name')->replace_content($obj->name)
                 ->select('.edit-link')->set_attribute(
-                'href' => $obj->slug.'/'
+                'href' => 'buckets/' . $obj->slug.'/'
                 )
                 ->select('.delete-link')->set_attribute(
                 'href' => $obj->slug.'/delete/'

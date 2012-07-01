@@ -4,17 +4,7 @@
 		<h1 class="video-name">Title here</h1>        
 		<a href="../"><h3 class="bucket-name">Event name here</h3></a>
 
-		<div id="mvcontainer"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</div>
-		<script type="text/javascript" src="http://media.dreamhost.com/mp4/swfobject.js"></script>
-
-		<script type="text/javascript">
-			var s1 = new SWFObject("http://media.dreamhost.com/mp4/player.swf","mp1","640","480","9","#FFFFFF");
-			s1.addParam("allowfullscreen","true");
-			s1.addParam("allowscriptaccess","always");
-			s1.addParam("flashvars","&file=[% video_url %]");
-			s1.write("mvcontainer");
-		</script>
-
+		<div class="videocontainer">[% container %]</div>
    
 		<p class="video-license">
 			This work is licensed under a 

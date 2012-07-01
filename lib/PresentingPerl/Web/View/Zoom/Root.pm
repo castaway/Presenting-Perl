@@ -39,7 +39,8 @@ sub front_page {
               #               ->select('.new-videos')->replace_content($obj->video_count)
               ->select('.total-videos')->replace_content(
                                                          $obj->bucket->video_count
-                                                        )
+	      );
+
             }
     } $announcements->all ];
     
@@ -83,6 +84,17 @@ sub video {
 
     my $zoom = $_;
 
+    # FIXME: I don't have a $c, so what should I be calling ->path_to on?
+    ## Also, mr ugly code: the 1st c_z line works for the local script template
+    ## the 2nd line works for the youtube iframe template
+    ## they seem to happily no-op on the "wrong" ones.. !
+    my $container_zoom = HTML::Zoom->from_file(PresentingPerl::Web->path_to('root/'.$stash->{video_type}));
+    $container_zoom = $container_zoom->select('*')->template_text_raw( { video_file => $video_url } );
+    $container_zoom = $container_zoom->select('iframe')->set_attribute( src => $video_url );
+#    print STDERR "Video file: $video_url\n";
+#    print STDERR "CZ: ", $container_zoom->to_html, "\n";
+
+
     $zoom = $zoom->select('.video-name')->replace_content($video->name)
       ->select('.author-name')->replace_content($video->author)
       ->select('.bucket-link')->set_attribute(
@@ -90,10 +102,13 @@ sub video {
         )
       ->select('.bucket-name')->replace_content($video->bucket->name)
       ->select('.video-details')->replace_content($video->details)
-      ->select('script')->template_text_raw({ video_url => $video_url });
+      ->select('.videocontainer')->template_text_raw({ container => $container_zoom->to_html });
+									
+
+#      ->select('script')->template_text_raw({ video_url => $video_url });
 
     $self->wrap($zoom, $stash);
-  
+    
 }
 
 1;
