@@ -1,10 +1,18 @@
         <div id="main-content">
 
+          <h1>
+            Welcome to Presenting Perl
+          </h1>
+
+          <div id="navbar">
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/archive/">Archive</a></li>
+              </ul>
+          </div>
+
           <div id="custom-html">        
-            <h1> 
-	      Welcome to Presenting Perl
-            </h1>
-            
+
             <p>
             Perl talks and Perl presentations about the 
             <a href="http://www.perl.org/">Perl programming language</a>.
@@ -43,7 +51,7 @@
                 <span class="made-at">1st March 2010</span>
                 <a class="bucket-link">
                 <span class="bucket-name">Some Random Event</span>
-                - (<span class="new-videos">2</span> new of <span class="total-videos">4</span> total)
+                (<span class="new-videos">2</span> new of <span class="total-videos">4</span> total)
                 </a>
               </li>
             </ul>
