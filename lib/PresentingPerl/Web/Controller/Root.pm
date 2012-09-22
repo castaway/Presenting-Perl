@@ -4,6 +4,7 @@ use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller' }
 use List::Util qw(first);
+use URI::Escape;
 
 
 #
@@ -32,6 +33,10 @@ sub auto :Private {
   my ($self, $c) = @_;
 
   $c->stash->{wrapper_template} = $c->path_to('root/pp-tempates/html/layout.html');
+
+#  my $base_uri = $c->req->base;
+#  $base_uri =~ s/\.index.psgi//;
+#  $c->req->base($base_uri);
 }
 
 =head2 front_page
@@ -69,14 +74,20 @@ sub video :Path :Args(2) {
     my $video_file = first { 
       -e join('/', $c->path_to('root/static'), $_)
     } map {
-        join('/', 'videos', $videorow->bucket->slug, $videorow->slug, $videorow->file_name.".$_")
+        join('/', 'videos', $videorow->bucket->slug, $videorow->slug, uri_escape($videorow->file_name).".$_")
     } @{ $c->config->{SupportedFormats} };
 
     $c->log->debug("File: $video_file, row: $videorow");
     return $c->forward('default') if(!$videorow || (!$video_file && !$videorow->external_embed_link));
 
     if($video_file) {
-	$video_file = $c->req->base . 'static/' . $video_file;
+        my $base_uri = $c->req->base->as_string;
+        $base_uri =~ s{index.psgi/}{};
+#        $video_file = uri_escape($video_file);
+        $c->log->debug("Setting video url using: $base_uri\n");
+        $video_file = $base_uri . 'static/' . $video_file;
+#        $video_file = $c->req->base . 'static/' . $video_file;
+#        $video_file = $c->uri_for('/static/' . $video_file);
     }
  
     $c->stash->{current_view} = 'Zoom';
