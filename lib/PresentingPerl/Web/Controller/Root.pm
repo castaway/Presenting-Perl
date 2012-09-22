@@ -62,6 +62,10 @@ sub video :Path :Args(2) {
     my ($self, $c, $bucket, $video) = @_;
 
     my $videorow = $c->model('DB::Video')->find({ slug => $video });
+    if(!$videorow) {
+        $c->debug("Can't find a videorow for $video");
+        return $c->forward('default');
+    }
     my $video_file = first { 
       -e join('/', $c->path_to('root/static'), $_)
     } map {

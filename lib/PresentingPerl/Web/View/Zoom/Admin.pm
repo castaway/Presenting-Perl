@@ -11,7 +11,7 @@ sub wrap {
   
   $zoom->select('#main-content')->collect_content({into => \@body})->run;
 
-  print STDERR Dumper(\@body);
+#  print STDERR Dumper(\@body);
 
   my $layout_zoom = HTML::Zoom->from_file($stash->{wrapper_template});
   # This does *not* modify $layout_zoom, but rather returns the modified version!
@@ -29,7 +29,7 @@ sub all_buckets {
             $_->select('.bucket-slug')->replace_content($obj->slug)
                 ->select('.bucket-name')->replace_content($obj->name)
                 ->select('.edit-link')->set_attribute(
-                'href' => 'buckets/' . $obj->slug.'/'
+                'href' => '/admin/buckets/' . $obj->slug.'/'
                 )
                 ->select('.delete-link')->set_attribute(
                 'href' => $obj->slug.'/delete/'
