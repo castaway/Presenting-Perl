@@ -91,7 +91,7 @@ sub video {
     my $container_zoom = HTML::Zoom->from_file(PresentingPerl::Web->path_to('root/'.$stash->{video_type}));
     $container_zoom = $container_zoom->select('*')->template_text_raw( { video_file => $video_url } );
     $container_zoom = $container_zoom->select('iframe')->set_attribute( src => $video_url );
-#    print STDERR "Video file: $video_url\n";
+    print STDERR "Video file: $video_url\n";
 #    print STDERR "CZ: ", $container_zoom->to_html, "\n";
 
 
