@@ -28,10 +28,9 @@
         
             <h2>Who runs this site?</h2>
             <p>
-            The site is built and maintained by 
-            <a href="http://www.shadowcat.co.uk/">Shadowcat Systems Limited</a>. Presenting Perl 
-            is powered by Idiot Box which is built using the 
-            <a href="http://search.cpan.org/dist/Web-Simple/">Perl Web::Simple</a> framework.
+            The site is maintained by <a href="http://www.shadowcat.co.uk/">Shadowcat Systems Limited</a>.
+            Presenting Perl is powered by a custom-built solution which uses the Perl-based
+            <a href="http://www.catalystframework.org/">Catalyst web framework</a>.
             </p>
             
             <h2>Licences</h2>
