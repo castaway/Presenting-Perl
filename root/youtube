@@ -1,0 +1,3 @@
+<div id='container'>
+  <iframe width="853" height="480" src="[% video_file %]" frameborder="0" allowfullscreen></iframe>
+</div>
