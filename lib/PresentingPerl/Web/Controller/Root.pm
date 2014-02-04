@@ -32,7 +32,7 @@ This gets run for everything.
 sub auto :Private {
   my ($self, $c) = @_;
 
-  $c->stash->{wrapper_template} = $c->path_to('root/pp-tempates/html/layout.html');
+  $c->stash->{wrapper_template} = $c->path_to('root/pp-templates/html/layout.html');
 
 #  my $base_uri = $c->req->base;
 #  $base_uri =~ s/\.index.psgi//;
