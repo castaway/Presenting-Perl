@@ -52,6 +52,33 @@ sub front_page :Path :Args(0) {
     $c->stash->{announcements} = $c->model("DB::Announcement")->top_n(5);
 }
 
+sub rss : Local : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my @videos = $c->model( "DB::Video" )->all;
+    my ( $updated ) = sort { $b <=> $a } map { $_->announcement->made_at } @videos;
+    @videos = map {
+        {
+            id       => $c->req->base . $_->bucket_slug . '/' . $_->slug . '/',
+            link     => $c->req->base . $_->bucket_slug . '/' . $_->slug . '/',
+            title    => uc( $_->bucket_slug ) . ' - ' . $_->name,
+            modified => $_->announcement->made_at,
+            issued   => $_->announcement->made_at,
+            author   => $_->author,
+        }
+    } @videos;
+
+    $c->stash->{feed} = {
+        format   => 'Atom',
+        id       => $c->req->base,
+        link     => $c->req->base,
+        title    => "Presenting Perl - Videos",
+        entries  => \@videos,
+        modified => $updated,
+    };
+    $c->stash->{current_view} = 'Feed';
+}
+
 sub bucket :Path :Args(1) {
     my ($self, $c, $bucket) = @_;
 
